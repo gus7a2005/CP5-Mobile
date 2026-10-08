@@ -147,23 +147,25 @@ npx tsx src/app.ts
 | Variável                | Descrição                                                                                                          |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `PORT`                  | Porta HTTP do servidor.                                                                                            |
-| `FIREBASE_PROJECT_ID`   | ID do projeto Firebase.                                                                                            |
-| `FIREBASE_CLIENT_EMAIL` | E-mail da conta de serviço (Firebase Admin SDK).                                                                   |
-| `FIREBASE_PRIVATE_KEY`  | Chave privada da conta de serviço — **configurada somente nas variáveis secretas da hospedagem**, nunca commitada. |
-| `FIREBASE_DATABASE_URL` | URL do Realtime Database.                                                                                          |
+| `FIREBASE_PROJECT_ID`         | ID do projeto Firebase.                                                                                            |
+| `FIREBASE_CLIENT_EMAIL`       | E-mail da conta de serviço (Firebase Admin SDK).                                                                   |
+| `FIREBASE_PRIVATE_KEY_BASE64` | Chave privada da conta de serviço, codificada em base64 (evita que painéis de hospedagem corrompam as quebras de linha) — **configurada somente nas variáveis secretas da hospedagem**, nunca commitada. |
+| `FIREBASE_DATABASE_URL`       | URL do Realtime Database.                                                                                          |
 
-> As credenciais administrativas (conta de serviço) **nunca** ficam no app mobile nem no repositório — apenas nas variáveis de ambiente secretas do serviço de hospedagem da API.
+> As credenciais administrativas (conta de serviço) **nunca** ficam no app mobile nem no repositório — apenas nas variáveis de ambiente secretas do serviço de hospedagem da API. A API aceita a chave em base64 (`FIREBASE_PRIVATE_KEY_BASE64`, recomendado) ou em texto puro com `\n` escapado (`FIREBASE_PRIVATE_KEY`, fallback).
 
 ### Publicar a API
 
-**TODO (equipe):** API ainda não publicada. Passos recomendados (ex.: [Render](https://render.com)):
+Hospedada no **Render** (Web Service gratuito):
 
-1. Criar um **Web Service** apontando para a pasta `server/` deste repositório.
-2. Build command: `npm install && npm run build` _(ou `npx tsc`, conforme script configurado)_; Start command: `node dist/app.js` (ou `npx tsx src/app.ts` em ambientes que suportem).
-3. Configurar as variáveis de ambiente listadas acima diretamente no painel do serviço (nunca no repositório).
-4. Após o deploy, atualizar `EXPO_PUBLIC_API_URL` no `.env` do app com a URL pública gerada.
+1. **Root Directory**: `server`.
+2. **Build Command**: `npm install && npm run build`; **Start Command**: `npm run start` (executa `node --openssl-legacy-provider dist/app.js` — a flag contorna um bug de decodificação de chaves RSA do OpenSSL 3.x em Node 22/24).
+3. Variáveis de ambiente configuradas diretamente no painel do serviço (nunca no repositório).
+4. `EXPO_PUBLIC_API_URL` no `.env` do app aponta para a URL pública gerada pelo Render.
 
-**URL pública da API:** `TODO — preencher após o deploy`
+**URL pública da API:** `https://chat-fiap-api.onrender.com`
+
+> O plano gratuito do Render hiberna o serviço após período de inatividade — a primeira requisição após a hibernação pode demorar ~30s para responder enquanto a instância é religada.
 
 ### Endpoints
 
@@ -253,4 +255,4 @@ Publicação das regras: Firebase Console → Firestore Database → **Regras** 
 - [x] `firebaseConfig.json` versionado no repositório (apenas config pública do SDK cliente).
 - [x] `.env.example` do app e do servidor versionados, sem segredos reais.
 - [x] `.env` (app e servidor) e qualquer `serviceAccount*.json` / `firebaseAdmin*.json` ignorados pelo Git ([.gitignore](.gitignore)).
-- [ ] Credenciais administrativas (`FIREBASE_PRIVATE_KEY` etc.) configuradas nas variáveis secretas da hospedagem da API — **pendente até o deploy**.
+- [x] Credenciais administrativas (`FIREBASE_PRIVATE_KEY_BASE64` etc.) configuradas apenas nas variáveis secretas do Render, nunca no repositório.
