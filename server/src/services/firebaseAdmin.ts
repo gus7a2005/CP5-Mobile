@@ -9,11 +9,17 @@ if (!FIREBASE_PROJECT_ID || !FIREBASE_CLIENT_EMAIL || !FIREBASE_PRIVATE_KEY || !
   throw new Error('Variáveis de ambiente do Firebase Admin ausentes (FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY, FIREBASE_DATABASE_URL).');
 }
 
+// Aceita a chave colada com quebras de linha reais ou com "\n" escapado, e remove aspas que alguns painéis de hospedagem incluem ao salvar a variável.
+function normalizePrivateKey(raw: string): string {
+  const unquoted = raw.trim().replace(/^"(.*)"$/s, '$1');
+  return unquoted.includes('\\n') ? unquoted.replace(/\\n/g, '\n') : unquoted;
+}
+
 initializeApp({
   credential: cert({
     projectId: FIREBASE_PROJECT_ID,
     clientEmail: FIREBASE_CLIENT_EMAIL,
-    privateKey: FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    privateKey: normalizePrivateKey(FIREBASE_PRIVATE_KEY),
   }),
   databaseURL: FIREBASE_DATABASE_URL,
 });
