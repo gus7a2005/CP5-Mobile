@@ -63,8 +63,9 @@ export async function notifyMessage(senderUid: string, cid: string, mid: string)
       const json = (await res.json()) as { data?: Ticket[] };
       await Promise.all((json.data ?? []).map(async (t, idx) => {
         if (t.status === 'ok') { sent += 1; return; }
-        if (t.details?.error === 'DeviceNotRegistered') {          // token inválido → desativa
-          await db.doc(chunk[idx].path).update({ enabled: false, updatedAt: Date.now() });
+        const device = chunk[idx];
+        if (device && t.details?.error === 'DeviceNotRegistered') {          // token inválido → desativa
+          await db.doc(device.path).update({ enabled: false, updatedAt: Date.now() });
         }
       }));
     }
