@@ -115,8 +115,6 @@ Configuração:
 3. Vá em **Settings → Upload** → **Add upload preset** → marque **Unsigned** → salve e anote o nome do preset.
 4. Preencha `EXPO_PUBLIC_CLOUDINARY_CLOUD_NAME` e `EXPO_PUBLIC_CLOUDINARY_UPLOAD_PRESET` no `.env` do app.
 
-> **TODO (equipe):** conta Cloudinary ainda não configurada neste ambiente — preencher após criar a conta.
-
 ---
 
 ## Notificações — configuração Android e iOS
