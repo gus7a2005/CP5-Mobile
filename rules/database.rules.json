@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "conversationMembers": {
+      "$cid": {
+        ".read": "auth != null && data.child(auth.uid).exists()",
+        ".write": false
+      }
+    },
+    "messages": {
+      "$cid": {
+        ".read": "auth != null && root.child('conversationMembers').child($cid).child(auth.uid).exists()",
+        ".write": "auth != null && root.child('conversationMembers').child($cid).child(auth.uid).exists()"
+      }
+    }
+  }
+}

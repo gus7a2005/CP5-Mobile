@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "Chat FIAP",
+    "slug": "chat-fiap",
+    "scheme": "chatfiap",
+    "version": "1.0.0",
+    "android": {
+      "package": "br.com.MESSAGEAPP.chat",
+      "googleServicesFile": "./google-services.json"
+    },
+    "ios": { "bundleIdentifier": "br.com.MESSAGEAPP.chat" },
+    "plugins": [
+      "expo-notifications",
+      ["expo-image-picker", { "photosPermission": "O app precisa acessar suas fotos para definir a foto de perfil." }]
+    ]
+  }
+}

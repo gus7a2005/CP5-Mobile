@@ -1,0 +1,9 @@
+{
+  "apiKey": "AIzaSyDBcsJrM9cFTWsMM65jqgJrgG3Ffr4PbiI",
+  "authDomain": "message-project-cp-mobile.firebaseapp.com",
+  "databaseURL": "https://message-project-cp-mobile-default-rtdb.firebaseio.com",
+  "projectId": "message-project-cp-mobile",
+  "storageBucket": "message-project-cp-mobile.firebasestorage.app",
+  "messagingSenderId": "687694963981",
+  "appId": "1:687694963981:web:73194333055f26e9b57c44"
+}

@@ -1,0 +1,51 @@
+import { StyleSheet } from 'react-native';
+
+export const colors = {
+  primary: '#2F6BFF',
+  background: '#FFFFFF',
+  surface: '#F3F4F6',
+  text: '#111827',
+  muted: '#6B7280',
+  border: '#E5E7EB',
+  danger: '#DC2626',
+  white: '#FFFFFF',
+  mine: '#DCEBFF',
+  theirs: '#F1F2F4',
+  warning: '#FEF3C7',
+  warningText: '#92400E',
+};
+
+export const commonStyles = StyleSheet.create({
+  screen: { flex: 1, backgroundColor: colors.background },
+  content: { padding: 16, gap: 12 },
+  title: { fontSize: 26, fontWeight: '700', color: colors.text },
+  sectionTitle: { fontSize: 16, fontWeight: '700', color: colors.text, marginTop: 8 },
+  label: { fontSize: 13, fontWeight: '600', color: colors.muted },
+  input: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 16,
+    color: colors.text,
+    backgroundColor: colors.white,
+  },
+  button: { backgroundColor: colors.primary, borderRadius: 10, paddingVertical: 12, alignItems: 'center' },
+  buttonDisabled: { opacity: 0.5 },
+  buttonText: { color: colors.white, fontSize: 16, fontWeight: '600' },
+  buttonOutline: {
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    alignItems: 'center',
+  },
+  buttonOutlineText: { color: colors.primary, fontWeight: '600' },
+  link: { color: colors.primary, textAlign: 'center', fontWeight: '600', paddingVertical: 8 },
+  muted: { color: colors.muted },
+  emptyText: { textAlign: 'center', color: colors.muted, marginTop: 32, paddingHorizontal: 24 },
+  banner: { backgroundColor: colors.warning, padding: 10 },
+  bannerText: { color: colors.warningText },
+});
